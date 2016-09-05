@@ -1,0 +1,668 @@
+第二周第二篇
+在千锋的实习，每天都会学到一些知识点，虽然很多知识都很基础，以前也学习过，但这是一个温故而知新的过程，曾经没有注意到的地方，在多次使用和学习后，都会有一些新的心得。
+
+public class MyPagerAdapter extends PagerAdapter{
+
+
+private List<ImageView> imageViews_viewPager ;
+
+
+
+
+
+public MyPagerAdapter(List<ImageView> imageViews_viewPager){
+
+
+ this.imageViews_viewPager = imageViews_viewPager ;
+
+
+}
+
+
+public MyPagerAdapter(){
+
+
+}
+
+
+@Override
+
+
+public int getCount() {
+
+
+ return imageViews_viewPager.size();
+
+
+}
+
+
+@Override
+
+
+public boolean isViewFromObject(View arg0, Object arg1) {
+
+
+ return arg0 == arg1;
+
+
+}
+
+
+@Override
+
+
+public Object instantiateItem(ViewGroup container, int position) {
+
+
+ //position %= imageViews_viewPager.size();
+
+
+ //System.out.println(imageViews_viewPager.size());
+
+
+ //System.out.println("初始化"+position);
+
+
+ ViewGroup group = (ViewGroup) imageViews_viewPager.get(position).getParent();
+
+
+ if(group!=null){
+
+
+  group.removeAllViews();
+
+
+ }
+
+
+ container.addView(imageViews_viewPager.get(position));
+
+
+ return imageViews_viewPager.get(position);
+
+
+}
+
+
+@Override
+
+
+public void destroyItem(ViewGroup container, int position, Object object) {
+
+
+ //position %= imageViews_viewPager.size();
+
+
+ //System.out.println("销毁"+position);
+
+
+ container.removeView((View) object);
+
+
+}
+
+
+}
+
+
+
+
+
+
+第三周第一篇
+在经过两周的学习后，终于学习了一些新的知识点。渐渐的感觉上课的进度越来越慢了，老师们已经渐渐开始划水了。。。
+public class MainActivity extends Activity {
+	RadioGroup radioGroup;
+	FragmentManager fragmentManager;
+	FragmentTransaction fragmentTransaction;
+	Fragment1 fragment1;
+	Fragment2 fragment2;
+	DiscoverFragment fragment3 ;
+	Fragment4 fragment4;
+	Fragment5 fragment5;
+
+	@SuppressLint("NewApi")
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.fragment_main);
+		radioGroup = (RadioGroup) findViewById(R.id.radiogroup);
+		fragment1 = new Fragment1();
+		fragment2 = new Fragment2();
+		fragment3 = new DiscoverFragment();
+		fragment4 = new Fragment4();
+		fragment5 = new Fragment5();
+		fragment1.setContext(getApplicationContext());
+		fragment2.setContext(getApplicationContext());
+		// fragment3.setContext(getApplicationContext());
+		fragment4.setContext(getApplicationContext());
+		fragment5.setContext(getApplicationContext());
+		fragmentManager = getFragmentManager();
+		fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.replace(R.id.ll1, fragment1);
+		fragmentTransaction.addToBackStack(null);
+		fragmentTransaction.commit();
+		radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@SuppressLint("NewApi")
+			public void onCheckedChanged(RadioGroup arg0, int arg1) {
+				RadioButton button = (RadioButton) findViewById(arg1);
+				switch (arg1) {
+				case R.id.r1:
+					fragmentTransaction = fragmentManager.beginTransaction();
+					fragmentTransaction.replace(R.id.ll1, fragment1);
+					fragmentTransaction.addToBackStack(null);
+					fragmentTransaction.commit();
+					break;
+				case R.id.r2:
+					fragmentTransaction = fragmentManager.beginTransaction();
+					fragmentTransaction.replace(R.id.ll1, fragment2);
+					fragmentTransaction.addToBackStack(null);
+					fragmentTransaction.commit();
+					break;
+				 case R.id.r3:
+				 fragmentTransaction=fragmentManager.beginTransaction();
+				 fragmentTransaction.replace(R.id.ll1, fragment3);
+				 fragmentTransaction.addToBackStack(null);
+				 fragmentTransaction.commit();
+				 break;
+				case R.id.r4:
+					fragmentTransaction = fragmentManager.beginTransaction();
+					fragmentTransaction.replace(R.id.ll1, fragment4);
+					fragmentTransaction.addToBackStack(null);
+					fragmentTransaction.commit();
+					break;
+				case R.id.r5:
+					fragmentTransaction = fragmentManager.beginTransaction();
+					fragmentTransaction.replace(R.id.ll1, fragment5);
+					fragmentTransaction.addToBackStack(null);
+					fragmentTransaction.commit();
+					break;
+				}
+			}
+		});
+	}
+	public void autoPlay(final ViewPager viewPager , final List<ImageView> imageViews_viewPager) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while (true) {
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							viewPager.setCurrentItem((viewPager.getCurrentItem() + 1)%imageViews_viewPager.size());
+						}
+					});
+				}
+			}
+		}).start();
+
+	}
+}
+第三周第二篇
+
+记录一些学习的笔记。
+1, android 中只要是悬浮框类型的 传递上下文是 必须用本类.this或者是自己初始化context对象
+2, android.os.NetworkOnMainThreadException  The exception that is thrown when an application attempts to perform a networking operation on its main thread. 从Honeycomb SDK（3.0）开始，google不再允许网络请求（HTTP、Socket）等相关操作直接在Main Thread类中。直接在UI线程进行网络操作，会阻塞UI、用户体验相当bad！
+即在Honeycomb SDK（3.0）以下的版本，还可以继续在Main Thread里这样做，在3.0以上，就不行了。
+第四周第一篇
+最终的实习任务，是模仿淘宝做一个App,但仅仅是实现UI层面上的。我们组一共是4个人，每个人都有自己的分工，我是我们的组长，负责其中的一个页面和最后的合并，因为没有使用版本控制工具，所以最后的合并也着实费了一番功夫。
+public class MainActivity extends Activity {
+	
+	ListView listView_home ;
+	TextView textView ;
+	//Handler handler_search ;
+	public static List<ImageView> imageViews_viewPager ;
+	int images_viewPager [] = {R.drawable.menu_viewpager_2,R.drawable.menu_viewpager_3,R.drawable.menu_viewpager_1
+			,R.drawable.menu_viewpager_4,R.drawable.menu_viewpager_5};
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		initView();
+		initData();
+		MyBaseAdapter adapter2 = new MyBaseAdapter(HomeBean.getStandHomeBeans(),getApplicationContext());
+		listView_home.setAdapter(adapter2);
+		//autoPlay();
+
+	}
+
+	
+
+	private void initData() {
+		for (int i = 0; i < images_viewPager.length; i++) {
+			ImageView imageView = new ImageView(getApplicationContext());
+			imageView.setImageResource(images_viewPager[i]);
+			imageView.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(MainActivity.this,CommodityDetailActivity.class);
+					startActivity(intent);
+				}
+			});
+			imageViews_viewPager.add(imageView);
+		}
+//		handler = new Handler(){
+//			@Override
+//			public void handleMessage(Message msg) {
+//				Intent intent = new Intent(MainActivity.this,SearchActivity.class);
+//			}
+//		};
+	}
+
+	private void initView() {
+		imageViews_viewPager = new ArrayList<ImageView>();
+		listView_home = (ListView) findViewById(R.id.listView_home);
+		textView = (TextView) findViewById(R.id.textview_search) ;
+		textView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this,SearchActivity.class);
+				startActivity(intent);
+			}
+		});
+	}
+	
+第四周第二篇
+最终的任务在我们幸苦的奋斗了两天之后，终于完成了。最后做出来的东西我们自己还是比较满意的。基本上还原了原淘宝项目的大部分功能。最后还有一场答辩，每组的组长上去介绍自己的项目，并做出讲解，在加上一些总结发言，一个月的千锋实习就正式结束了。
+
+
+
+
+第一周周志
+这一周经历了换房风波，从到温馨家园的不满意，到梦寐以求的酒店，再到最后被忽悠去的地方。经历了这些之后竟然发现最初拥有的才是最好的，也是醉了。其实还是对新环境的不习惯，习惯之后什么甲醛味什么的也都能忍受了。因为住宿的问题，耽搁了两天之后，才开始了正式实习。
+public class CommodityDetailActivity extends Activity {
+
+	Button gang1, gang2, mei1, mei2, sum, sub, black, white , sure;
+	TextView show;
+	ViewPager viewPager_detailShow;
+	ImageButton imageButton;
+	List<ImageView> viewPagers_dataSet;
+	List<HomeBean> homebeans_cd;
+	ListView listView_cd;
+	int images_detailShow[] = { R.drawable.detail_show_1,
+			R.drawable.detail_show_2, R.drawable.detail_show_3,
+			R.drawable.detail_show_4, R.drawable.detail_show_5,
+			R.drawable.detail_show_6 };
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_commo_detail);
+		initView();
+		initData();
+	}
+
+	private void initData() {
+		viewPagers_dataSet = new ArrayList<ImageView>();
+		for (int i = 0; i < images_detailShow.length; i++) {
+			ImageView imageView = new ImageView(getApplicationContext());
+			imageView.setImageResource(images_detailShow[i]);
+			viewPagers_dataSet.add(imageView);
+		}
+		MyPagerAdapter adapter = new MyPagerAdapter(viewPagers_dataSet);
+		viewPager_detailShow.setAdapter(adapter);
+		homebeans_cd = new ArrayList<HomeBean>();
+		for (int i = 0; i < 10; i++) {
+			HomeBean homeBean = new HomeBean();
+			homeBean.setWhich(2);
+			homebeans_cd.add(homeBean);
+		}
+		MyBaseAdapter adapter2 = new MyBaseAdapter(homebeans_cd,
+				getApplicationContext());
+		listView_cd.setAdapter(adapter2);
+		listView_cd.setFocusable(false);
+		listView_cd.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri
+						.parse("http://yecaoly.taobao.com"));
+				startActivity(intent);
+			}
+		});
+	}
+
+	private void initView() {
+		imageButton = (ImageButton) findViewById(R.id.actionbar_back);
+		listView_cd = (ListView) findViewById(R.id.listView_commo_detail);
+		viewPager_detailShow = (ViewPager) findViewById(R.id.view_pager_detail);
+		imageButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				try {
+					finish();
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public void showDialog(View v) {
+		final int id = v.getId();
+		final AlertDialog dialog = new AlertDialog.Builder(
+				CommodityDetailActivity.this).create();
+		dialog.show();
+		Window window = dialog.getWindow();
+		window.setContentView(R.layout.window_shoppingcar);
+		window.setGravity(Gravity.BOTTOM);
+		window.setLayout(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		window.setWindowAnimations(R.style.animShoppingCar);
+		gang1 = (Button) ((LinearLayout) window.findViewById(R.id.ll_gang))
+				.getChildAt(0);
+		gang1.setTag(0);
+		gang2 = (Button) ((LinearLayout) window.findViewById(R.id.ll_gang))
+				.getChildAt(1);
+		gang2.setTag(0);
+		for (int i = 0; i < 2; i++) {
+			((LinearLayout) window.findViewById(R.id.ll_gang)).getChildAt(i)
+					.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							if (((Integer) v.getTag()) == 0) {
+								gang1.setBackgroundResource(R.drawable.circularbtn);
+								gang2.setBackgroundResource(R.drawable.circularbtn);
+								gang1.setTag(0);
+								gang2.setTag(0);
+								v.setBackgroundResource(R.drawable.noclickstyle);
+								v.setTag(1);
+							} else {
+								v.setBackgroundResource(R.drawable.circularbtn);
+								v.setTag(0);
+							}
+						}
+					});
+
+		}
+		mei1 = (Button) ((LinearLayout) window.findViewById(R.id.ll_mei))
+				.getChildAt(0);
+		mei1.setTag(0);
+		mei2 = (Button) ((LinearLayout) window.findViewById(R.id.ll_mei))
+				.getChildAt(1);
+		mei2.setTag(0);
+		for (int i = 0; i < 2; i++) {
+			((LinearLayout) window.findViewById(R.id.ll_mei)).getChildAt(i)
+					.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							if (((Integer) v.getTag()) == 0) {
+								mei1.setBackgroundResource(R.drawable.circularbtn);
+								mei2.setBackgroundResource(R.drawable.circularbtn);
+								mei1.setTag(0);
+								mei2.setTag(0);
+								v.setBackgroundResource(R.drawable.noclickstyle);
+								v.setTag(1);
+							} else {
+								v.setBackgroundResource(R.drawable.circularbtn);
+								v.setTag(0);
+							}
+						}
+					});
+
+		}
+		black = (Button) ((LinearLayout) window.findViewById(R.id.ll_color))
+				.getChildAt(0);
+		black.setTag(0);
+		white = (Button) ((LinearLayout) window.findViewById(R.id.ll_color))
+				.getChildAt(1);
+		white.setTag(0);
+		for (int i = 0; i < 2; i++) {
+			((LinearLayout) window.findViewById(R.id.ll_color)).getChildAt(i)
+					.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							if (((Integer) v.getTag()) == 0) {
+								black.setBackgroundResource(R.drawable.circularbtn);
+								white.setBackgroundResource(R.drawable.circularbtn);
+								black.setTag(0);
+								white.setTag(0);
+								v.setBackgroundResource(R.drawable.noclickstyle);
+								v.setTag(1);
+							} else {
+								v.setBackgroundResource(R.drawable.circularbtn);
+								v.setTag(0);
+							}
+						}
+					});
+
+		}
+		sum = (Button) window.findViewById(R.id.btn_sumsum);
+		sub = (Button) window.findViewById(R.id.btn_sub);
+		show = (TextView) window.findViewById(R.id.textview_show);
+		sum.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				show.setText((Integer.parseInt(show.getText().toString().trim())+1)+"");
+			}
+		});
+		sub.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if(Integer.parseInt(show.getText().toString().trim())<=1){
+					Toast.makeText(getApplicationContext(), "购买数量不能低于1件", 1).show();
+				}else{
+					show.setText((Integer.parseInt(show.getText().toString().trim())-1)+"");
+				}
+			}
+		});
+		sure = (Button) window.findViewById(R.id.btn_sure);
+		sure.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(id==R.id.ib_shoppingcar){
+					Toast.makeText(getApplicationContext(), "添加到购物车成功", 1).show();
+					Goods good1 = new Goods("尽在恋上猫女衣坊 http://yecaoly.taobao.com","时尚女衣", "32G 港版", "49", "2", "白色", R.drawable.detail_show_1);
+					Message message = new Message();
+					message.obj = good1 ;
+					Fragment1.getHnadler().sendMessage(message);
+					dialog.cancel();
+				}
+				if(id==R.id.ib_buynow){
+					Intent intent = new Intent(CommodityDetailActivity.this,ConfirmActivity.class);
+					startActivity(intent);
+					//跳转
+				}
+			}
+		});
+	}
+}
+
+第二周周志
+这一周，老师还是讲了一些知识点的，虽然都是一些基础的知识点，但是还是能学到一点的。别的班的老师听说都比较水，不过感觉我们android班的老师还是不错的，只是认真的讲课而已，从来不向我们打千锋的广告。每次讲完知识点，都有一个练习的时间，感觉还是挺好的。虽然觉得这是千锋在故意拖节奏。。。
+public class Fragment1 extends Fragment {
+	
+	ImageButton scanf ;
+	Context context;
+	
+	public Context getContext() {
+		return context;
+	}
+	public void setContext(Context context) {
+		this.context = context;
+	}
+
+	ListView listView_home ;
+	TextView textView ;
+	View view ;
+	//Handler handler_search ;
+	public static List<ImageView> imageViews_viewPager ;
+	int images_viewPager [] = {R.drawable.menu_viewpager_2,R.drawable.menu_viewpager_3,R.drawable.menu_viewpager_1
+			,R.drawable.menu_viewpager_4,R.drawable.menu_viewpager_5};
+	
+	  @Override
+	  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	  		Bundle savedInstanceState) {
+	  	view=inflater.inflate(R.layout.activity_main, null);
+	  	initView();
+		initData();
+		MyBaseAdapter adapter2 = new MyBaseAdapter(HomeBean.getStandHomeBeans(),context);
+		listView_home.setAdapter(adapter2);
+	  	return view;
+	  }
+	private void initData() {
+		for (int i = 0; i < images_viewPager.length; i++) {
+			ImageView imageView = new ImageView(context);
+			imageView.setImageResource(images_viewPager[i]);
+			imageView.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					//bug
+					Intent intent = new Intent(context,CommodityDetailActivity.class);
+					startActivity(intent);
+				}
+			});
+			imageViews_viewPager.add(imageView);
+		}
+	}
+
+	private void initView() {
+		scanf = (ImageButton) view.findViewById(R.id.scanf);
+		imageViews_viewPager = new ArrayList<ImageView>();
+		listView_home = (ListView) ( view.findViewById(R.id.listView_home));
+		textView = (TextView) view.findViewById(R.id.textview_search) ;
+		textView.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context,SearchActivity.class);
+				startActivity(intent);
+			}
+		});
+		scanf.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent();
+				intent.setClass(context, MipcaActivityCapture.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+			}
+		});
+	}
+	
+}
+第三周周志
+这一周，老师已经开始划水了。基本上不再讲新的知识点了。中间还出个插曲，因为UI班的老师走了之后，竟然给我们互换老师，让我们ANDROID班的去学习HTML，还给了一大堆理由，说什么以后工作都会用到，简直了。所以这几天基本上就是偶尔上上HTML，然后我们大部分时间都是在自习，不过这样也不错，有了时间，可以去学习一些自己想学的东西。
+public class Fragment2 extends Fragment {
+	Context context ;
+	
+    ListView listView;
+    List<Map<String,Object>> mlist=new ArrayList<Map<String,Object>>();
+    private int imgs[]={R.drawable.tao_1,R.drawable.tao_3,R.drawable.detail_show_1,R.drawable.detail_show_2,
+    		R.drawable.detail_show_3,R.drawable.detail_show_4,R.drawable.detail_show_5,R.drawable.detail_show_6};
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    		Bundle savedInstanceState) {
+    	View view=inflater.inflate(R.layout.activity_main2, null);
+		listView=(ListView) view.findViewById(R.id.listView1);
+		for(int i=0;i<imgs.length;i++){
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("imgs", imgs[i]);
+		mlist.add(map);
+		}
+		MyAdapter adapter=new MyAdapter();
+		listView.setAdapter(adapter);
+    	return view;
+    }
+    
+
+	public Context getContext() {
+		return context;
+	}
+
+	public void setContext(Context context) {
+		this.context = context;
+	}
+
+	class MyAdapter extends BaseAdapter{
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return mlist.size();
+		}
+
+		@Override
+		public Object getItem(int arg0) {
+			// TODO Auto-generated method stub
+			return mlist.get(arg0);
+		}
+
+		@Override
+		public long getItemId(int arg0) {
+			// TODO Auto-generated method stub
+			return arg0;
+		}
+
+		@Override
+		public View getView(int arg0, View arg1, ViewGroup arg2) {
+			// TODO Auto-generated method stub
+			View view;
+			LayoutInflater inflater=LayoutInflater.from(context);
+			if(arg0==0){
+				view=inflater.inflate(R.layout.list2_1, null);
+				ImageView imageView=(ImageView) view.findViewById(R.id.imageView1);
+				imageView.setImageResource(imgs[0]);
+			}else{
+			    view=inflater.inflate(R.layout.list2_2, null);
+				ImageView imageView=(ImageView) view.findViewById(R.id.imageView2);
+				imageView.setImageResource(imgs[arg0]);
+			}
+			return view;
+		}
+	}
+}
+第四周周志
+这一周有个任务，就是我们要做个仿淘宝APP，是分组进行的。老师给了几个项目让我们选，然后经过商量之后，选择了这个淘宝项目。这个APP主要有五个页面，也就可以分成五个部分来做。我是负责主页的，做的过程中虽然也遇到了一些困难，但还好最后的解决了。项目完成后还有一个答辩，每组组长上去讲解之后，基本上也就结束了，千锋实习也就基本上结束了。
+public class SearchActivity extends Activity{
+
+	ImageButton button ;
+	ListView listView_serach ;
+	List< HomeBean> beans ;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_search);
+		initView();
+		initData();
+	}
+	private void initData() {
+		beans = new ArrayList<HomeBean>();
+		for(int i = 0 ; i < 10 ; i ++){
+			HomeBean bean = new HomeBean();
+			bean.setWhich(3);
+			beans.add(bean);
+		}
+		MyBaseAdapter adapter = new MyBaseAdapter(beans, getApplicationContext());
+		listView_serach.setAdapter(adapter);
+	}
+	private void initView() {
+		button = (ImageButton) findViewById(R.id.actionbar_back_search);
+		listView_serach = (ListView) findViewById(R.id.listView_search);
+		button.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+	}
+}

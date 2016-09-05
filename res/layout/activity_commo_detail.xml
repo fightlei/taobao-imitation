@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    >
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!-- title -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ff5000" >
+
+        <ImageButton
+            android:id="@+id/actionbar_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/tb_icon_actionbar_back" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/actionbar_refresh"
+            android:layout_toRightOf="@id/actionbar_back"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="宝贝详情"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/actionbar_refresh"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/tb_icon_actionbar_refresh_48" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager_detail"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" >
+            </android.support.v4.view.ViewPager>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/text_link"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:text="时尚女衣  流行女衣  连衣裙  半身裙  尽在恋上猫女衣坊  店铺地址：http://yecaoly.taobao.com" />
+
+                <ImageView
+                    android:id="@+id/cd_divider"
+                    android:layout_width="1dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_height="match_parent"
+                    android:background="#c0c6c9" />
+
+                <ImageButton
+                    android:background="#ffffff"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/second_2" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="26dp"
+                android:textColor="#cc3366"
+                android:text="￥ 100" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="#c0c6c9"
+                    android:text="卖家包邮" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="#c0c6c9"
+                    android:text="月销 1234笔" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="#c0c6c9"
+                    android:text="广州 发货" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="10dp"
+                android:background="#e5e4e6" />
+			<TextView 
+			    android:layout_marginLeft="10dp"
+			    android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="宝贝评价"
+        android:textColor="#000000"
+        android:textSize="20sp"/>
+            <ListView
+                android:divider="#000000"
+                android:dividerHeight="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/listView_commo_detail"
+                android:layout_width="match_parent"
+                android:layout_height="1000dp" >
+            </ListView>
+            <TextView 
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+	</LinearLayout>
+	<RelativeLayout 
+	    android:layout_alignParentBottom="true"
+	    android:background="#ffffff"
+	    android:layout_width="match_parent"
+	    android:layout_height="50dp">
+	    <ImageButton 
+	        android:id="@+id/ib_shoppingcar"
+	        android:background="#ffffff"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="100dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:onClick="showDialog"
+	        android:src="@drawable/put_in"/>
+	     <ImageButton 
+	         android:id="@+id/ib_buynow"
+	         android:onClick="showDialog"
+	         android:background="#ffffff"
+	         android:layout_alignParentRight="true"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="10dp"
+	        android:src="@drawable/buy_now"/>
+	</RelativeLayout>
+</RelativeLayout>

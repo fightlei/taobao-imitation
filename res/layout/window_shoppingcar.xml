@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="365dp"
+    android:background="#ffffff"
+    >
+   
+    <LinearLayout 
+        android:id="@+id/ll_one"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <ImageView 
+            android:layout_marginLeft="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/detail_show_1"/>
+        <TextView 
+            android:textColor="#ff0000"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥ 49.00  库存750"/>
+    </LinearLayout>
+    
+     <ScrollView 
+         android:layout_below="@id/ll_one"
+        android:layout_width="match_parent"
+        android:background="#ffffff"
+        android:layout_height="365dp">
+    <LinearLayout 
+        android:background="#e5e4e6"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView 
+        android:gravity="center_vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textColor="#c0c6c9"
+        android:text="类型"/>
+    <ImageView 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c0c6c9"/>
+    <LinearLayout 
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout 
+            android:id="@+id/ll_gang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        	<Button 
+        	    android:background="@drawable/circularbtn"
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    android:text="16G港版"/>
+        	<Button 
+        	    android:background="@drawable/circularbtn"
+        	    android:layout_marginRight="10dp"
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    android:text="32G港版"/>
+    	</LinearLayout>
+    	<LinearLayout 
+    	    android:id="@+id/ll_mei"
+    	    android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        	<Button 
+        	    android:background="@drawable/circularbtn"
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    android:text="16G美版"/>
+        	<Button 
+        	    android:background="@drawable/circularbtn"
+        	    android:layout_marginRight="10dp"
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    android:text="16G美版"/>
+  		</LinearLayout>
+    </LinearLayout>
+    
+    <TextView 
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textColor="#c0c6c9"
+        android:text="颜色"/>
+    	
+    <ImageView 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c0c6c9"/>
+    
+    	<LinearLayout 
+    	    android:id="@+id/ll_color"
+    	    android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        	<Button 
+        	    android:background="@drawable/circularbtn"
+        	    android:layout_width="70dp"
+        	    android:layout_height="wrap_content"
+        	    android:text="黑色"/>
+        	<Button 
+        	    android:background="@drawable/circularbtn"
+        	    android:layout_marginRight="10dp"
+        	    android:layout_width="70dp"
+        	    android:layout_height="wrap_content"
+        	    android:text="白色"/>
+  		</LinearLayout>
+ <ImageView 
+     android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c0c6c9"/>
+ 
+ 
+ 
+ <RelativeLayout 
+     android:layout_marginTop="10dp"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal"
+     android:gravity="center_vertical"
+     >
+        <TextView 
+            android:id="@+id/count"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:textColor="#c0c6c9"
+        android:text="购买数量"/>
+        <LinearLayout 
+            android:layout_alignParentRight="true"
+            android:layout_width="match_parent"
+            android:gravity="right"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+     <Button 
+         android:id="@+id/btn_sub"
+         android:layout_width="40dp"
+         android:layout_height="40dp"
+         android:text="-"/>
+     <TextView 
+         android:id="@+id/textview_show"
+         android:gravity="center"
+         android:layout_width="60dp"
+         android:layout_height="35dp"
+         android:text="1"
+         android:textColor="#000000"
+         android:background="#ffffff"/>
+     <Button 
+         android:id="@+id/btn_sumsum"
+         android:layout_width="40dp"
+         android:layout_height="40dp"
+         android:text="+"/>
+     </LinearLayout>
+ </RelativeLayout>
+ 
+ 
+ 
+  <ImageView 
+      android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c0c6c9"/>
+  <TextView 
+      android:layout_width="match_parent"
+      android:layout_height="50dp"/>
+    	
+    	</LinearLayout>
+    
+    
+
+    </ScrollView>
+    
+    <LinearLayout 
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <Button 
+            android:id="@+id/btn_sure"
+            android:text="确定"
+            android:textColor="#ffffff"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:background="#ff5000"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

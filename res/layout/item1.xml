@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+      <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/checkBox1"
+        android:src="@drawable/ic_launcher" />
+
+    <CheckBox
+        android:id="@+id/checkBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp" />
+
+    <TextView
+        android:id="@+id/typeName"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/checkBox1"
+        android:layout_toRightOf="@+id/imageView1"
+        android:text="时尚女衣" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/typeName"
+        android:layout_alignBottom="@+id/typeName"
+        android:layout_marginLeft="14dp"
+        android:layout_toRightOf="@+id/typeName"
+        android:text="尽在恋上猫女衣坊" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/name"
+        android:layout_alignBottom="@+id/name"
+        android:layout_alignParentRight="true"
+        android:text="30¥" />
+
+    <TextView
+        android:id="@+id/xx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/typeName"
+        android:layout_below="@+id/typeName"
+        android:text="类型：" 
+        android:textColor="#dddddd"/>
+
+    <TextView
+        android:id="@+id/color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignRight="@+id/name"
+        android:textColor="#dddddd"
+        android:text="黑色" />
+
+    <TextView
+        android:id="@+id/count"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/color"
+        android:layout_alignBottom="@+id/color"
+        android:layout_alignParentRight="true"
+        android:text="¥1" />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/xx"
+        android:layout_alignBottom="@+id/xx"
+        android:layout_toRightOf="@+id/xx"
+        android:text="16G 美版"
+        android:textColor="#dddddd" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/type"
+        android:layout_alignBottom="@+id/type"
+        android:layout_toLeftOf="@+id/color"
+        android:text="颜色:"
+        android:textColor="#dddddd" />
+
+</RelativeLayout>
